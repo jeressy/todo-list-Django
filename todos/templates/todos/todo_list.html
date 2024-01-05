@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block page_title %}
+    Lista de Tarefas
+{% endblock page_title %}
+
+
+
+{% block content %}
+            <h1>Lista de Task</h1>
+
+            {% if todo_list %}
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Título</th>
+                            <th scope="col">Data de criação</th>
+                            <th scope="col">Fazer até</th>
+                            <th scope="col">Finalizado em</th>
+                            <th scope="col">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for todo in todo_list %}
+                            <tr>
+                                <th scope="row">{{ todo.pk }}</th>
+                                <td>{{ todo.title }}</td>
+                                <td>{{ todo.created_at }}</td>
+                                <td>{{ todo.deadline }}</td>
+                                <td>{{ todo.finished_at|default:"Não finalizado" }}</td>
+                                <td>
+                                    <a href="#">
+                                        <button type="button" class="btn btn-primary btn-sm">Concluir</button>
+                                    </a> 
+                                    <a href="#">
+                                        <button type="button" class="btn btn-secondary btn-sm">Excluir</button>
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+            {% else %}
+                <p>Você não tem tarefas ativas.</p>
+
+            {% endif %}
+            <a href="{% url "todo_create" %}">
+                <button type="button" class="btn btn-primary btn-sm">Crie uma</button>
+            </a> 
+{% endblock content %}
