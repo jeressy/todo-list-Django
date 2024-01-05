@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block title %}
+    Excluir Tarefa
+{% endblock title %}
+
+{% block content %}
+<form method="POST">
+    {% csrf_token %}
+    
+    <h1>Deletar tarefa</h1>
+    <p>Tem certeza que deseja excluir esta tarefa? Esta ação não pode ser desfeita.
+    </p>
+    {{ form|crispy }}
+
+    <button type="submit" class="btn btn-danger">Excluir tarefa</button>
+</form>
+
+{% endblock content %}
+
+
+

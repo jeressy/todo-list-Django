@@ -18,7 +18,9 @@
                             <th scope="col">Data de criação</th>
                             <th scope="col">Fazer até</th>
                             <th scope="col">Finalizado em</th>
-                            <th scope="col">Ações</th>
+                            <th scope="col"></th>
+                            <th scope="col"></th>
+                            <th scope="col"></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -30,13 +32,21 @@
                                 <td>{{ todo.deadline }}</td>
                                 <td>{{ todo.finished_at|default:"Não finalizado" }}</td>
                                 <td>
-                                    <a href="#">
-                                        <button type="button" class="btn btn-primary btn-sm">Concluir</button>
-                                    </a> 
-                                    <a href="#">
-                                        <button type="button" class="btn btn-secondary btn-sm">Excluir</button>
+                                    <a href="{% url 'todo_update' pk=todo.pk %}">
+                                        <button type="button" class="btn btn-info btn-sm">Editar</button>
                                     </a>
                                 </td>
+                                
+                                <td>
+                                    <button type="button" class="btn btn-success btn-sm">Concluir</button>
+                                </td>
+                                
+                                <td>
+                                    <a href="{% url 'todo_delete' pk=todo.pk %}">
+                                        <button type="button" class="btn btn-danger btn-sm">Excluir</button>
+                                    </a>
+                                </td>
+                                
                             </tr>
                         {% endfor %}
                     </tbody>

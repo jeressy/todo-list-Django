@@ -1,8 +1,6 @@
 from .models import ToDo
-from django.views.generic import ListView, CreateView
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
-from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Submit
 
 
 class TodoListView(ListView):
@@ -16,9 +14,13 @@ class TodoCreateView(CreateView):
     success_url = reverse_lazy("todo_list")
     template_name = "todos/todo_form.html"
 
-    def get_form(self, form_class=None):
-        form = super().get_form(form_class)
-        helper = FormHelper()
-        helper.add_input(Submit("submit", "Salvar"))
-        form.helper = helper
-        return form
+
+class TodoUpdateView(UpdateView):
+    model = ToDo
+    fields = ["title", "deadline"]
+    success_url = reverse_lazy("todo_list")
+
+
+class TodoDeleteView(DeleteView):
+    model = ToDo
+    success_url = reverse_lazy("todo_list")
